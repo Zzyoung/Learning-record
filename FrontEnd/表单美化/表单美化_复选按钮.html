@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+	<title>表单美化_复选按钮</title>
+	<style type="text/css">
+	body{
+		font: 13px/26px "微软雅黑";
+	}
+	.typeList{
+		width: 540px;
+		height: 30px;
+		margin: 50px auto;
+		border: 1px solid #DFDFDF;
+		border-width: 1px 0;
+	}
+	.typeList ul{
+		height: 30px;
+		line-height: 30px;
+		padding-left: 15px;
+	}
+	.typeList ul li{
+		float: left;
+		margin-right: 12px;
+		overflow: hidden;
+	}
+	.typeList ul li input{
+		display: none;
+	}
+	.typeList ul li b{
+		display: block;
+		height: 20px;
+		width: 20px;
+		background:url(images/checkbox.gif) no-repeat -12px -18px;
+		position: absolute;
+		margin-top: 6px;
+	}
+	.typeList ul li:hover b{
+		background-position: -12px -118px;
+	}
+	.typeList ul li label{
+		padding-left: 23px;
+	}
+	.typeList ul .selected b,.typeList ul .selected:hover b{
+		background-position: -12px -218px;
+	} 
+	</style>
+	<script type="text/javascript">
+	function addLoadEvent (func) {
+		var oldonload = window.onload;
+		if(typeof window.onload != 'function'){
+			window.onload = func;
+		}else{
+			window.onload = function(){
+				oldonload();
+				func();
+			};
+		}
+	}
+	function createTag () {//动态创建b标签
+		var li = document.getElementById("checkList").getElementsByTagName("li");
+		var label;
+		for (var i = 0; i < li.length; i++) {
+			label = li[i].getElementsByTagName("label");
+			var bTag = document.createElement("b");
+			li[i].insertBefore(bTag,label[0]);
+		}
+
+	}
+	function checklist () {//点击变换效果
+		var li = document.getElementById("checkList").getElementsByTagName("li");
+		for (var i = 0; i < li.length; i++) {
+			li[i].onclick = function(){
+				if(this.className == "selected"){
+					this.className = null;
+				} else {
+					this.className = "selected";
+				}
+			};
+		}
+	}
+	addLoadEvent(createTag);
+	addLoadEvent(checklist);
+	</script>
+<link rel="stylesheet" type="text/css" href="public.css">
+</head>
+<body>
+<div class="typeList">
+	<form name="typeList" action="#" method="post">
+		<ul id="checkList">
+			<li class="selected">
+				<input id="xiao" type="checkbox" name="typeList"/><label for="xiao">消费者保障</label>	
+			</li>
+			<li>
+				<input id="broken" type="checkbox" name="typeList"/><label for="broken">破损补寄</label>	
+			</li>
+			<li>
+				<input id="sevendays" type="checkbox" name="typeList"/><label for="sevendays">7天退换</label>	
+			</li>
+			<li>
+				<input id="good" type="checkbox" name="typeList"/><label for="good">正品保障</label>	
+			</li>
+			<li>
+				<input id="ele" type="checkbox" name="typeList"/><label for="ele">电子凭证</label>	
+			</li>
+			<li>
+				<input id="wang" type="checkbox" name="typeList"/><label for="wang">旺旺在线</label>	
+			</li>
+			<li>
+				<input id="pinpai" type="checkbox" name="typeList"/><label for="pinpai">品牌授权</label>	
+			</li>
+			<li>
+				<input id="pay" type="checkbox" name="typeList"/><label for="pay">货到付款</label>	
+			</li>
+			<li>
+				<input id="credit" type="checkbox" name="typeList"/><label for="credit">信用卡</label>	
+			</li>
+		</ul>
+	</form>
+</div>
+</body>
+</html>

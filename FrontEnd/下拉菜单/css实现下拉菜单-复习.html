@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>屌丝必将统治世界</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		a{
+			text-decoration: none;
+		}
+		#nav{
+			width: 600px;
+			margin: 0 auto;
+			background: #eee;
+			overflow: hidden;
+		}
+		#nav ul{
+			list-style-type: none;
+		}
+		#nav ul li{
+			float: left;
+			height: 40px;
+			line-height: 40px;
+		}
+		#nav ul li a{
+			display: block;
+			color: #000;
+			padding: 0 10px;
+		}
+		#nav ul li a:hover{
+			background: #666;
+			color: #fff;
+		}
+		#nav ul li:hover ul{
+			display: block;
+		}
+		#nav ul li ul{
+			position: absolute;
+			display: none;
+		}
+		#nav ul li ul li {
+			width: 100px;
+			float: none;
+			margin-top: 1px;
+			background: #eee;
+		}
+		#nav ul li ul li a{
+			padding: 0 10px;
+		}
+		#nav ul li ul li a:hover{
+			background: #00f;
+		}
+	</style>
+</head>
+<body>
+	<div id="nav">
+		<ul>
+			<li><a href="#">首页</a></li>
+			<li><a href="#">课程大厅</a>
+				<ul>
+					<li><a href="#">JavaScript</a></li>
+					<li><a href="#">jQuery</a></li>
+				</ul>
+			</li>
+			<li><a href="#">学习中心</a>
+				<ul>
+					<li><a href="#">JavaScript</a></li>
+					<li><a href="#">jQuery</a></li>
+				</ul>
+			</li>
+			<li><a href="#">经典案例</a></li>
+			<li><a href="#">关于我们</a></li>
+		</ul>
+	</div>
+</body>
+</html>

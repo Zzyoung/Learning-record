@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>屌丝必将统治世界</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#demo{
+			width: 400px;
+			height: 255px;
+			margin: 50px;
+			position: relative;
+			border: 1px solid #ccc;
+		}
+		#small-box{
+			position: relative;
+			z-index: 1;
+		}
+		#float-box{
+			display: none;
+			width: 160px;
+			height: 120px;
+			position: absolute;
+			background: #ffffcc;
+			border: 1px solid #ccc;
+			filter:alpha(opacity=50);
+			opacity: 0.5;
+			cursor: move;
+		}
+		#big-box{
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 460px;
+			width: 400px;
+			height: 300px;
+			overflow: hidden;
+			border: 1px solid #ccc;
+			z-index: 1;
+		}
+		#big-box img{
+			position: absolute;
+			z-index: 2;
+		}
+		#mark{
+			position: absolute;
+			width: 400px;
+			height: 255px;
+			z-index: 3;
+			cursor: move;
+			background: #fff;
+			opacity: 0;
+			filter:alpha(opacity=0);
+		}
+	</style>
+	<script>
+	window.onload= function(){
+		var objDemo = document.getElementById("demo"),
+			objSmallBox = document.getElementById("small-box"),
+			objFloatBox = document.getElementById("float-box"),
+			objBigBox = document.getElementById("big-box"),
+			objBigBoxImg = objBigBox.getElementsByTagName("img")[0],
+			objMark = document.getElementById("mark");
+
+		objMark.onmouseover = function(){
+			objFloatBox.style.display = "block";
+			objBigBox.style.display = "block";
+		}
+
+		objMark.onmouseout = function(){
+			objFloatBox.style.display = "none";
+			objBigBox.style.display = "none";
+		}
+
+		objMark.onmousemove = function(event){
+			event = event || window.event;
+			var left = event.clientX -objDemo.offsetLeft-objSmallBox.offsetLeft-objFloatBox.offsetWidth/2,
+				top = event.clientY - objDemo.offsetTop - objSmallBox.offsetTop-objFloatBox.offsetHeight/2;
+
+			if(left<0){
+				left = 0;
+			}else if(left > (objMark.offsetWidth-objFloatBox.offsetWidth)){
+				left = objMark.offsetWidth-objFloatBox.offsetWidth;
+			}
+
+			if(top<0){
+				top = 0;
+			}else if (top > (objMark.offsetHeight-objFloatBox.offsetHeight)){
+				top = objMark.offsetHeight-objFloatBox.offsetHeight;
+			}
+			var	percentX = left/(objMark.offsetWidth-objFloatBox.offsetWidth),
+				percentY = top/(objMark.offsetHeight-objFloatBox.offsetHeight);
+
+			objFloatBox.style.left = left +"px";
+			objFloatBox.style.top = top+"px";
+
+			objBigBoxImg.style.left = -percentX*(objBigBoxImg.offsetWidth-objBigBox.offsetWidth)+"px";
+			objBigBoxImg.style.top = -percentY*(objBigBoxImg.offsetHeight-objBigBox.offsetHeight)+"px";
+		}
+	}
+	</script>
+</head>
+<body>
+<div id="demo">
+	<div id="small-box">
+		<div id="mark"></div>
+		<div id="float-box"></div>
+		<img src="macbook-small.jpg" alt="">
+	</div>
+	<div id="big-box">
+		<img src="macbook-big.jpg" alt="">
+	</div>
+</div>
+</body>
+</html>

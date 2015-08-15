@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>表单美化_下拉列表</title>
+	<link rel="stylesheet" type="text/css" href="public.css">
+	<style type="text/css">
+	body{
+		font: 16px/32px "微软雅黑";
+		background: #333;
+	}
+	#box{
+		width: 500px;
+		height: 326px;
+		border: 3px solid #000;
+		background: #fff;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin: -163px 0 0 -250px;
+	}
+	.province{
+		width: 320px;
+		height: 42px;
+		background: #C00;
+		margin: 0 auto;
+		position: relative;
+	}
+	.province strong{
+		width: 64px;
+		height: 42px;
+		line-height: 42px;
+		display: block;
+		float: left;
+		color: #fff;
+		padding-left: 10px;
+	}
+	#selectProvince{
+		display: block;
+		width: 200px;
+		height: 28px;
+		float: left;
+		background: #fff url(images/province_sprites.png) no-repeat 190px 1px;
+		margin-top: 7px;
+		padding-left: 8px;
+		color: #CCC;
+		cursor: pointer;
+	}
+	#allProvince{
+		width: 318px;
+		height: auto;
+		line-height: 30px;
+		clear: both;
+		position: absolute;
+		top: 42px;
+		background: #fff;
+		border: 1px solid #dfdfdf;
+		border-top: none;
+		display: none;
+		z-index: 2;
+	}
+	#allProvince li{
+		height: 30px;
+		border-bottom: 1px solid #dfdfdf;
+	}
+	#allProvince li b{
+		font-weight: bold;
+		display: inline-block;
+		width: 40px;
+		text-align: center;
+	}
+	#allProvince li span{
+		padding-right: 15px;
+		cursor: pointer;
+	}
+	#allProvince li span:hover{
+		color: #f00;
+	}
+	#layer{
+		width: 100%;
+		height: 100%;
+		background: #fff;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+		filter:alpha(opacity=0);
+		opacity: 0;
+		display: none;
+	}
+	</style>
+	<script type="text/javascript">
+	function addLoadEvent (func) {
+		var oldonload = window.onload;
+		if(typeof window.onload != 'function'){
+			window.onload = func;
+		}else{
+			window.onload = function(){
+				oldonload();
+				func();
+			};
+		}
+	}
+	function getDom (id) {
+		return document.getElementById(id);
+	}
+	function showProvince () {
+		getDom("selectProvince").onclick=function(){
+			showAllProvince();
+		}
+	}
+	function showAllProvince () {
+		getDom("allProvince").style.display = "block";
+		getDom("layer").style.display = "block";
+		getDom("selectProvince").style.backgroundPosition = "190px -17px";
+		getDom("selectProvince").style.color = "#ccc";
+		getDom("layer").onclick = function () {
+			hideAllProvince();
+		}
+		selectProvince();
+	}
+	function hideAllProvince () {
+		getDom("allProvince").style.display = "none";
+		getDom("layer").style.display = "none";
+		getDom("selectProvince").style.backgroundPosition = "190px 1px";
+		getDom("selectProvince").style.color = "#000";
+	}
+	function selectProvince () {
+		var pro = getDom("allProvince").getElementsByTagName("li");
+		var links;
+		for (var i = 0; i < pro.length; i++) {
+			links = pro[i].getElementsByTagName("span");
+			for (var j = 0; j < links.length; j++) {
+				links[j].onclick = function(){
+					getDom("selectProvince").innerHTML = this.innerHTML;
+					hideAllProvince();
+				}
+			};
+		};
+	}
+	addLoadEvent(showProvince);
+	</script>
+</head>
+<body>
+<div id="box">
+	<div class="province">
+		<strong>送货至：</strong>
+		<span id="selectProvince">北京</span>
+		<ul id="allProvince">
+			<li><b>A</b><span>安徽</span></li>
+			<li><b>B</b><span>北京</span></li>
+			<li><b>C</b><span>重庆</span></li>
+			<li><b>F</b><span>福建</span></li>
+			<li><b>G</b><span>广东</span><span>广西</span></li>
+			<li><b>H</b><span>河南</span><span>河北</span><span>黑龙江</span></li>
+		</ul>
+	</div>
+</div>
+<div id="layer"></div>
+</body>
+</html>

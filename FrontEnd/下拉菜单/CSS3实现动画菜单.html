@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CSS3实现动画菜单</title>
+	<style type="text/css">
+	#nav{
+		width: 960px;
+		margin: 60px auto;
+		border: 1px solid #222;
+		background-color: #111;
+		background-image: linear-gradient(#444,#000);
+		border-radius: 6px;
+		box-shadow: 0 1px 1px #777;
+		padding: 0;
+		list-style: none;
+		/*overflow: visible;*/
+	}
+	#nav:after{
+		content: " ";
+		display: table;
+		clear: both;
+	}
+	#nav li{
+		float: left;
+		border-right: 1px solid #222;
+		box-shadow: 1px 0 0 #444;
+	}
+	#nav li a{
+		display: block;
+		padding: 12px 30px;
+		color: #999;
+		font:bold 12px;
+		text-decoration: none;
+		text-shadow:0 1px 0 #000;
+	}
+	#nav li a:hover{
+		color: #fafafa;
+	}
+	#nav li ul{
+		visibility: hidden;
+		position: absolute;
+		list-style: none;
+		padding: 0;
+		background-color: #444;
+		background-image: linear-gradient(#444,#000);
+		box-shadow: 0 -1 0 rgba(255,255,255,.3);
+		border-radius: 3px;
+		opacity: 0;
+		margin-top: 20px;
+		transition:all .2s ease-in-out;
+	}
+	#nav li:hover > ul {
+		opacity: 1;
+		visibility: visible;
+		margin:0; 
+	}
+	#nav ul li{
+		float: none;
+		display: block;
+		border: 0;
+		box-shadow: 0 1px 0 #111;
+	}
+	#nav ul a{
+		padding: 10px;
+		width: 130px;
+		display: block;
+		float: none;
+	}
+	#nav ul a:hover{
+		background-color: #0186BA;
+		background-image: linear-gradient(#04acec,#0186ba);
+	}
+	#nav ul li:first-child>a{
+		border-radius: 3px 3px 0 0;
+
+	}
+	#nav ul li:last-child>a{
+		border-radius: 0 0 3px 3px;
+	}
+	#nav ul li:first-child>a:before{
+		content: "";
+		position: absolute;
+		left: 40px;
+		top: -6px;
+		border-left: 6px solid transparent;
+		border-right: 6px solid transparent;
+		border-bottom: 6px solid #444;
+	}
+	#nav ul li:first-child>a:hover:before{
+		border-bottom-color: #04acec;
+	}
+	#nav ul ul{
+		position: absolute;
+		left: 150px;
+		top:0px;
+		margin: 0 0 0 20px;
+		box-shadow: -1px 0 0 rgba(255,255,255,.3);
+	}
+	#nav ul ul li:first-child a:before{
+		left: -6px;
+		top:20px;
+		margin-top: -6px;
+		border-left: 0;
+		border-top: 6px solid transparent;
+		border-bottom: 6px solid transparent;
+		border-right: 6px solid #3b3b3b;
+	}
+	#nav ul ul li:first-child a:hover:before{
+		border-right-color: #0299d3;
+		border-bottom-color: transparent;
+	}
+	</style>
+</head>
+<body>
+<ul id="nav">
+	<li><a href="#">首页</a></li>
+	<li><a href="#">课程大厅</a></li>
+	<li><a href="#">学习中心</a>
+		<ul>
+			<li><a href="#">前端课程</a>
+			<ul>
+				<li><a href="#">JavaScript</a></li>
+				<li><a href="#">css</a></li>
+				<li><a href="#">jQuery</a></li>
+			</ul>
+			</li>
+			<li><a href="#">手机开发</a></li>
+			<li><a href="#">后台编程</a></li>
+		</ul>
+	</li>
+	<li><a href="#">关于我们</a></li>
+</ul>
+</body>
+</html>

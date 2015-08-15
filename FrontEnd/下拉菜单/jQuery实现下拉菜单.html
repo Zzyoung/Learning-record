@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>jQuery实现下拉菜单</title>
+	<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	#nav{
+		width: 600px;
+		height: 40px;
+		margin: 0 auto;
+		background-color: #eee;
+	}
+	a{
+		text-decoration: none;
+		display: block;
+		color: #000;
+		padding: 0 10px;
+		width: 90px;
+	}
+	ul{
+		list-style: none;
+	}
+	ul li{
+		float: left;
+		line-height: 40px;
+		text-align: center;
+	}
+	ul li a:hover{
+		background-color: #666;
+		color: #fff;
+	}
+	ul li ul{
+		position: absolute;
+		display: none;
+	}
+	ul li ul li {
+		float: none;
+		background-color: #eee;
+		margin-top: 2px;
+	}
+	ul li ul li a:hover{
+		background-color: #06f;
+		color: #fff;
+	}
+	</style>
+	<script src="../../jQuery/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$(".navmenu").mouseover(function(){
+			$(this).children("ul").show();
+		})
+
+		$(".navmenu").mouseout(function(){
+			$(this).children("ul").hide();
+		})
+	})
+	</script>
+</head>
+<body>
+<div id="nav">
+	<ul>
+		<li><a href="#">首页</a></li>
+		<li class="navmenu"><a href="#">课程大厅</a><ul>
+			<li><a href="#">JavaScript</a></li>
+			<li><a href="#">jQuery</a></li>
+		</ul></li>
+		<li class="navmenu"><a href="#">学习中心</a><ul>
+			<li><a href="#">视频学习</a></li>
+			<li><a href="#">案例学习</a></li>
+			<li><a href="#">交流平台</a></li>
+		</ul></li>
+		<li><a href="#">经典案例</a></li>
+		<li><a href="#">关于我们</a></li>
+	</ul>
+</div>
+</body>
+</html>
