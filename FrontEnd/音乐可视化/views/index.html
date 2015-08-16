@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale = 1.0,user-scalable=no">
+<title>小蘑菇音乐播放器</title>
+<link rel="stylesheet" href="../public/stylesheets/index.css">
+</head>
+<body>
+	<header>
+		<h1>小蘑菇音乐播放器</h1>
+		<ul class="type" id="type">
+			<li data-type="dot">Dot</li>
+			<li data-type="column" class="selected">Column</li>
+		</ul>
+		<p><span>Volume</span><input id="volume" type="range" min="0" max="100" value="20"></p>
+	</header>
+	<div id="add"><span>Local Music</span><input id="upload" type="file"></div>
+	<div class="left">
+		<ul id="list">
+			<li title="duandian.mp3">张敬轩 - 断点.mp3</li>
+			<li title="yongqi.mp3">梁静茹 - 勇气.mp3</li>
+			<li title="nuannuan.mp3">梁静茹 - 暖暖.mp3</li>
+			<li title="huozhe.mp3">郝云-活着.mp3</li>
+		</ul>
+	</div>
+	<div class="right" id="box"></div>
+	<script type="text/javascript" src="../public/javascripts/MusicVisualizer.js"></script>
+	<script src="../public/javascripts/index.js"></script>
+</body>
+</html>
