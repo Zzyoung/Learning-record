@@ -16,7 +16,8 @@ function MusicVisualizer(obj){
 MusicVisualizer.ac = new (window.AudioContext || window.webkitAudioContext)();
 
 MusicVisualizer.prototype.load = function(url,fn){
-	url = decodeURI(encodeURI(url));
+	console.log("2start load-->"+new Date());
+	url = encodeURI(url);
 	this.xhr.abort();
 	this.xhr.open("GET",url);
 	this.xhr.responseType = "arraybuffer";
@@ -25,17 +26,22 @@ MusicVisualizer.prototype.load = function(url,fn){
 		fn(self.xhr.response);//ajax返回之后执行
 	};
 	this.xhr.send();
+	console.log("3end load-->"+new Date());
 };
 
 MusicVisualizer.prototype.decode = function(arraybuffer,fn){
+	console.log("5start decode-->"+new Date());
 	MusicVisualizer.ac.decodeAudioData(arraybuffer,function(buffer){
+		console.log("start decode callback-->"+new Date());
 		fn(buffer);//解码成功之后执行
 	},function(err){
 		console.log(err);
 	});
+	console.log("6end decode-->"+new Date());
 };
 
 MusicVisualizer.prototype.play = function(url){
+	console.log("1start play-->"+new Date());
 	var n = ++this.count;
 	var self = this;
 	this.currentSource && this.stop();
@@ -62,9 +68,11 @@ MusicVisualizer.prototype.play = function(url){
 				bufferSource.buffer = buffer;
 				bufferSource[bufferSource.start?"start":"noteOn"](0);
 				self.currentSource = bufferSource; 
+				console.log("end decode callback-->"+new Date());
 			});
 		});
 	}
+	console.log("4end play-->"+new Date());
 };
 
 MusicVisualizer.prototype.stop = function(){

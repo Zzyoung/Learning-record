@@ -1,12 +1,16 @@
-var lis = document.getElementById("list").getElementsByTagName("li"),
+function $(s){
+	return document.querySelectorAll(s);
+}
+var lis = $("#list li"),
 	size = 32,
-	types = document.getElementById("type").getElementsByTagName("li"),
-	box = document.getElementById("box"),
+	types = $("#type li"),
+	box = $("#box")[0],
 	canvas = document.createElement("canvas"),
 	height,width,
 	ctx = canvas.getContext("2d"),
 	dots = [],
 	line = null,//线性渐变被覆盖，拿出来声明避免被覆盖
+	local = $("#add span")[0],
 	mv = new MusicVisualizer({
 		size:size,
 		visualizer:draw
@@ -19,12 +23,13 @@ for ( var i = 0; i < lis.length; i++) {
 			lis[j].className = "";
 		};
 		this.className = "selected";
-		document.getElementById("add").getElementsByTagName("span")[0].style.color = "white";
-		document.getElementById("add").getElementsByTagName("span")[0].innerHTML = "Local Music";
-		document.getElementById("add").getElementsByTagName("span")[0].title = "Local Music";
+		local.style.color = "white";
+		local.innerHTML = "Local Music";
+		local.title = "Local Music";
 		mv.play("/music/public/media/" + this.title);
 	};
 };
+
 
 function random(m,n){
 	return Math.round(Math.random()*(n-m)+m);
@@ -109,17 +114,17 @@ for ( var i = 0; i < types.length; i++) {
 
 resize();//初始化
 window.onresize = resize;//窗口大小改变时重新初始化
-document.getElementById("volume").onmousedown = function() {
+$("#volume")[0].onmousedown = function() {
 	this.onmousemove = function() {
 		mv.changeVolume(this.value / this.max);
 	};
 };
 mv.changeVolume(0.2);//默认音量
 
-document.getElementById("add").onclick = function(){
-	document.getElementById("upload").click();
+$("#add")[0].onclick = function(){
+	$("#upload")[0].click();
 };
-document.getElementById("upload").onchange = function(){
+$("#upload")[0].onchange = function(){
 	var file = this.files[0];
 	var fr = new FileReader();
 	
@@ -127,12 +132,12 @@ document.getElementById("upload").onchange = function(){
 		mv.play(e.target.result);
 	};
 	fr.readAsArrayBuffer(file);
-	if(document.getElementsByClassName("play")[0]){
-		document.getElementsByClassName("play")[0].className = "";
+	if($(".play")[0]){
+		$(".play")[0].className = "";
 	}
-	document.getElementById("add").getElementsByTagName("span")[0].innerHTML = this.value.substring(this.value.lastIndexOf("\\")+1);
-	document.getElementById("add").getElementsByTagName("span")[0].title = this.value.substring(this.value.lastIndexOf("\\")+1);
-	document.getElementById("add").getElementsByTagName("span")[0].style.color = "green";
+	local.innerHTML = this.value.substring(this.value.lastIndexOf("\\")+1);
+	local.title = this.value.substring(this.value.lastIndexOf("\\")+1);
+	local.style.color = "green";
 	for ( var j = 0; j < lis.length; j++) {
 		lis[j].className = "";
 	};
