@@ -30,8 +30,8 @@ MusicVisualizer.prototype.load = function(url,fn){
 MusicVisualizer.prototype.decode = function(arraybuffer,fn){
 	MusicVisualizer.ac.decodeAudioData(arraybuffer,function(buffer){
 		fn(buffer);//解码成功之后执行
-	},function(){
-		//console.log(err);
+	},function(err){
+		console.log(err);
 	});
 };
 
