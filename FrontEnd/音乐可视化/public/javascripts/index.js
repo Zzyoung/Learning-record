@@ -3,7 +3,8 @@ function $(s){
 }
 var lis = $("#list li"),
 	size = 32,
-	types = $("#type li"),
+	//types = $("#type li"),
+	type = $("#type")[0],
 	box = $("#box")[0],
 	canvas = document.createElement("canvas"),
 	height,width,
@@ -44,7 +45,7 @@ function getDots(){
 		dots.push({
 			x:x,
 			y:y,
-			dx:random(1,3),
+			dx:random(1,4),
 			color:color,
 			cap:0
 		});
@@ -102,15 +103,21 @@ function draw(arr){
 
 draw.type = "column";
 
-for ( var i = 0; i < types.length; i++) {
-	types[i].onclick = function() {
-		for ( var j = 0; j < types.length; j++) {
-			types[j].className = "";
-		}
-		this.className = "selected";
-		draw.type = this.getAttribute("data-type");
-	};
-}
+type.onclick = function(){
+	var classList = $("#type i")[0].classList;
+	if(draw.type == "column"){
+		this.setAttribute("data-type","dot");
+		draw.type = "dot";
+		classList.remove("fa-bar-chart");
+		classList.add("fa-star");
+	}else if(draw.type == "dot"){
+		this.setAttribute("data-type","column");
+		draw.type = "column";
+		classList.remove("fa-star");
+		classList.add("fa-bar-chart");
+	}
+};
+
 
 resize();//初始化
 window.onresize = resize;//窗口大小改变时重新初始化

@@ -25,6 +25,7 @@ header h1{
 	font-size: 40px;
 	height: 60px;
 	line-height: 60px;
+	font-family: "微软雅黑";
 }
 header p{
 	font-size:16px;
@@ -75,55 +76,21 @@ header p{
 	left: -webkit-calc(15% + 20px);
 }
 #type{
-/* 	border-radius:5px;
-	border:solid #fff 2px;
-	overflow:hidden;
-	height:40px;
-	line-height:40px;
-	font-size:16px;*/
-	width:164px; 
-	margin:0 auto;
-}
-/*#type>li{
-	float:left;
-	cursor:pointer;
-	width:80px;
-}
-#type .selected{
-	background:#fff;
-	color:#000;
-}*/
-
-header .type:after{
-	display:block;
-	content:"";
-	clear:both;
-}
-header .type li {
-	list-style:none;
-	float:left;
+	position: absolute;
+	right: 2%;
+	top:124px;
+	width: 30px;
 	height:30px;
 	line-height:30px;
-	width:80px;
-	border-top:solid 1px #fff;
-	border-right:solid 1px #fff;
-	border-bottom:solid 1px #fff;
+	border: solid 1px #fff;
 	cursor:pointer;
+	border-radius: 5px;
+	font-size: 14px;
 }
-header .type li:first-child{
-	border-left:solid 1px #fff;
-	border-top-left-radius:5px;
-	border-bottom-left-radius:5px;
+#type i{
+	color: #0f0;
 }
-header .type li:last-child{
-	border-left:solid 1px #fff;
-	border-top-right-radius:5px;
-	border-bottom-right-radius:5px;
-}
-header .type .selected{
-	background:#fff;
-	color:#000;
-}
+
 input[type="range"]{
 	-webkit-appearance:none;
 	height:8px;
@@ -165,10 +132,8 @@ input[type="range"]::-moz-range-thumb{
 		height: 26px;
 		line-height: 26px;
 	}
-	header .type li {
-		height:16px;
-		line-height:16px;
-		width:80px;
+	#type{
+		top:60px;
 	}
 	.left,.right{
 		top:100px;
