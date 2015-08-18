@@ -19,7 +19,7 @@ header{
 	left: 10px;
 	top: 10px;
 	right: 10px;
-	height: 150px;
+	height: 100px;
 }
 header h1{
 	font-size: 40px;
@@ -37,7 +37,7 @@ header p{
 	padding:5px;
 	width:15%;
 	left:10px;
-	top:130px;
+	top:80px;
 	font-size:20px;
 	cursor:pointer;
 	overflow:hidden;
@@ -49,8 +49,8 @@ header p{
 }
 .left{
 	left: 10px;
-	top: 170px;
-	bottom: 10px;
+	top: 120px;
+	bottom: 115px;
 	width: 15%;
 	border: solid #fff 1px;
 }
@@ -69,16 +69,16 @@ header p{
 	color: green;
 }
 .right{
-	top: 170px;
+	top: 120px;
 	right: 10px;
-	bottom: 10px;
+	bottom: 115px;
 	left: calc(15% + 20px);
 	left: -webkit-calc(15% + 20px);
 }
 #type{
 	position: absolute;
 	right: 2%;
-	top:124px;
+	top:70px;
 	width: 30px;
 	height:30px;
 	line-height:30px;
@@ -120,6 +120,84 @@ input[type="range"]::-moz-range-thumb{
 	border:none;
 	border-radius:100%;	
 }
+#divplayer{
+/* 	background: #0f0; */
+	height: 115px;
+	width: 563px;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+}
+.music_bar{
+	position: absolute;
+	left: 248px;
+	top: 43px;
+/* 	background: #ff0; */
+	width: 280px;
+	height: 42px;
+}
+.prev_music{
+    float: left; 
+	display: inline-block;
+	background: url(../images/bg.png) -69px 0px;
+	height: 28px;
+	width: 36px;
+}
+#playbtn{
+	float: left; 
+	display: inline-block;
+	background: url(../images/bg.png) -105px 0px;
+	height: 42px;
+	width: 42px;
+}
+.next_music{
+	display: inline-block;
+	background: url(../images/bg.png) -147px 0px;
+	height: 28px;
+	width: 36px;
+	float: left; 
+}
+#palyWayBtn{
+	display: inline-block;
+	background: url(../images/bg.png) -219px 0px;
+	height: 28px;
+	width: 36px;
+	float: left; 
+}
+#spanmute{
+	display: inline-block;
+	background: url(../images/bg.png) -189px 0px;
+	height: 24px;
+	width: 24px;
+
+}
+#spanvolume{
+	display: inline-block;
+	width: 71px;
+	height: 11px;
+	position: relative;
+	background: url(../images/bg.png) -291px -11px;
+}
+.volume_bar{
+	display: block;
+	width: 71px;
+	height: 11px;
+	width: 60%;
+	position: absolute;
+	background: url(../images/bg.png) -291px 0px;
+}
+.volume_op{
+	position: absolute;
+	width: 6px;
+	height: 11px;
+	background: url(../images/bg.png) -366px 0px;
+	top: 0;
+	left: 60%;
+}
+
+.prev_music span,.playmusic span,.next_music span,#palyWayBtn span{
+	visibility: hidden;
+}
 @media screen and (max-width:800px),screen and (max-height:400px){
 	body{
 		font-size:12px;
@@ -133,10 +211,13 @@ input[type="range"]::-moz-range-thumb{
 		line-height: 26px;
 	}
 	#type{
-		top:60px;
+		top:40px;
 	}
 	.left,.right{
-		top:100px;
+		top:90px;
+	}
+	.right{
+		bottom: 80px;
 	}
 	#add{
 		font-size:14px;
