@@ -3,15 +3,17 @@ function $(s){
 }
 var lis = $("#list li"),
 	size = 32,
-	//types = $("#type li"),
 	type = $("#type")[0],
 	box = $("#box")[0],
+	spanmute = $("#spanmute")[0],
+	spanvolume = $("#spanvolume")[0],
 	canvas = document.createElement("canvas"),
 	height,width,
 	ctx = canvas.getContext("2d"),
 	dots = [],
 	line = null,//线性渐变被覆盖，拿出来声明避免被覆盖
 	local = $("#add span")[0],
+	playModeBtn = $("#palyModeBtn")[0],
 	mv = new MusicVisualizer({
 		size:size,
 		visualizer:draw
@@ -150,3 +152,58 @@ $("#upload")[0].onchange = function(){
 	};
 	
 };
+playModeBtn.onclick = function(){
+	var self = this;
+	var playModeSelect = $("#play_mode_select")[0];
+	playModeSelect.style.display = "block";
+	var playModes = playModeSelect.childNodes;
+	for (var i = 0,len = playModes.length; i < len ; i++) {
+		playModes[i].onclick = function(event){
+			self.title = this.title;
+			self.querySelector("span").innerHTML = this.title;
+			self.className = this.className;
+			playModeSelect.style.display = "none";
+			changeModeSequence(this.title,playModeSelect);
+		}
+	};
+};
+
+//选中一个播放模式之后切换整个列表的顺序，让选中的排在最下面
+function changeModeSequence(title,playModeSelect){
+	console.log(title);
+	var selectIndex = 0;
+	for (var i = 0,len = playModeSelect.childNodes.length; i < len; i++) {
+		if(playModeSelect.childNodes[i].title ==title){
+			selectIndex = i;
+			break;
+		}
+	};	
+	while(selectIndex<3){
+		playModeSelect.insertBefore(playModeSelect.removeChild(playModeSelect.lastChild),playModeSelect.firstChild);
+		selectIndex++;
+	}
+}
+spanmute.onclick = function(){
+	this.className = this.className=="volume_open"?"volume_close":"volume_open";
+};
+spanvolume.onclick = function(event){
+	var left = calculateLeft(this);
+	var width = this.offsetWidth;
+	var percent = Math.floor((event.clientX-left)/width*100);
+	console.log(percent);
+	$("#spanvolumebar")[0].style.width = percent+"%";
+	$("#spanvolumeop")[0].style.left = percent+"%";
+
+}
+
+function calculateLeft(self){
+	var left = self.offsetLeft;
+	var parent = self.parentNode;
+	while(parent = parent.parentNode){
+		if(parent===document.body){
+			break;
+		}
+		left+=parent.offsetLeft;
+	}
+	return left;
+}

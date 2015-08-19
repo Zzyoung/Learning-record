@@ -34,11 +34,11 @@
 			<strong title="下一首" class="next_music">
 				<span>下一首</span>
 			</strong>
-			<strong title="顺序播放" class="ordered" id="palyWayBtn">
+			<strong title="顺序播放" class="unordered" id="palyModeBtn">
 				<span>顺序播放</span>
 			</strong>
 			<p class="volume" title="音量调节">
-				<span class="volume_icon" id="spanmute" title="点击设为静音"></span>
+				<span class="volume_open" id="spanmute" title="点击设为静音"></span>
 				<span class="volume_regulate" id="spanvolume">
 					<span class="volume_bar" id="spanvolumebar"></span>
 					<span class="volume_op" id="spanvolumeop"></span>
@@ -46,6 +46,7 @@
 			</p>
 		</div>
 	</div>
+	<ul id="play_mode_select"><li title="单曲循环" class="cycle_single"></li><li title="列表循环" class="cycle"></li><li title="顺序播放" class="ordered"></li><li title="随机播放" class="unordered"></li></ul>
 	<script type="text/javascript" src="../public/javascripts/MusicVisualizer.js"></script>
 	<script src="../public/javascripts/index.js"></script>
 </body>
