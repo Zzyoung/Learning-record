@@ -153,6 +153,8 @@ playModeBtn.onclick = function(){
 	var self = this;
 	var playModeSelect = $("#play_mode_select")[0];
 	playModeSelect.style.display = "block";
+	playModeSelect.style.left = calculateLeft(playModeBtn) +"px";
+	playModeSelect.style.top = calculateTop(playModeBtn) +"px";
 	var playModes = playModeSelect.childNodes;
 	for (var i = 0,len = playModes.length; i < len ; i++) {
 		playModes[i].onclick = function(event){
@@ -175,9 +177,10 @@ function changeModeSequence(title,playModeSelect){
 			break;
 		}
 	};	
-	while(selectIndex<3){
-		playModeSelect.insertBefore(playModeSelect.removeChild(playModeSelect.lastChild),playModeSelect.firstChild);
-		selectIndex++;
+	while(selectIndex>0){
+		console.log("index-->"+selectIndex);
+		playModeSelect.appendChild(playModeSelect.firstChild);
+		selectIndex--;
 	}
 }
 
@@ -205,6 +208,14 @@ function calculateLeft(self){
 		left+=parent.offsetLeft;
 	}
 	return left;
+}
+function calculateTop(self){
+	var top = self.offsetTop;
+	var parent = self.parentNode;
+	while(parent = parent.offsetParent){
+		top+=parent.offsetTop;
+	}
+	return top;
 }
 
 spanvolumeop.onmousedown = function(event){
