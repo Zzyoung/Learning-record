@@ -7,6 +7,8 @@ var lis = $("#list li"),
 	box = $("#box")[0],
 	spanmute = $("#spanmute")[0],
 	spanvolume = $("#spanvolume")[0],
+	spanvolumeop = $("#spanvolumeop")[0],
+	spanvolumebar = $("#spanvolumebar")[0],
 	canvas = document.createElement("canvas"),
 	height,width,
 	ctx = canvas.getContext("2d"),
@@ -123,12 +125,7 @@ type.onclick = function(){
 
 resize();//初始化
 window.onresize = resize;//窗口大小改变时重新初始化
-$("#volume")[0].onmousedown = function() {
-	this.onmousemove = function() {
-		mv.changeVolume(this.value / this.max);
-	};
-};
-mv.changeVolume(0.2);//默认音量
+
 
 $("#add")[0].onclick = function(){
 	$("#upload")[0].click();
@@ -183,27 +180,51 @@ function changeModeSequence(title,playModeSelect){
 		selectIndex++;
 	}
 }
+
+//音量控制
 spanmute.onclick = function(){
 	this.className = this.className=="volume_open"?"volume_close":"volume_open";
+	var volume = this.className=="volume_close"?0:spanvolumeop.offsetLeft/(spanvolume.offsetWidth-spanvolumeop.offsetWidth);
+	mv.changeVolume(volume);
+	//mv.volumeOpen = this.className=="volume_close"?false:true;
 };
 spanvolume.onclick = function(event){
 	var left = calculateLeft(this);
 	var width = this.offsetWidth;
 	var percent = Math.floor((event.clientX-left)/width*100);
-	console.log(percent);
-	$("#spanvolumebar")[0].style.width = percent+"%";
-	$("#spanvolumeop")[0].style.left = percent+"%";
-
+	spanvolumebar.style.width = percent+"%";
+	spanvolumeop.style.left = percent+"%";
+	mv.changeVolume(percent/100);
+	spanmute.className === "volume_close" && (spanmute.className = "volume_open");
 }
 
 function calculateLeft(self){
 	var left = self.offsetLeft;
 	var parent = self.parentNode;
-	while(parent = parent.parentNode){
-		if(parent===document.body){
-			break;
-		}
+	while(parent = parent.offsetParent){
 		left+=parent.offsetLeft;
 	}
 	return left;
 }
+
+spanvolumeop.onmousedown = function(event){
+	this.style.backgroundPositionY = -16+"px";
+	spanvolumebar.style.backgroundPositionY = -22+"px";
+	spanmute.className === "volume_close" && (spanmute.className = "volume_open");
+	document.onmousemove = function(e){
+		var width = spanvolume.offsetWidth;
+		var percent = (e.clientX - calculateLeft(spanvolume))/width*100;
+		percent = percent>=(100-spanvolumeop.offsetWidth)?(100-spanvolumeop.offsetWidth)	:percent<=0?0:percent;
+		spanvolumebar.style.width = percent+"%"; 
+		spanvolumeop.style.left =  percent +"%";
+		mv.changeVolume(percent/100);
+	}
+	document.onmouseup = function(e){
+		this.onmousemove = null;
+		spanvolumeop.style.backgroundPositionY = 0 +"px";
+		spanvolumebar.style.backgroundPositionY = 0+"px";
+	}
+};
+
+
+mv.changeVolume(spanvolumeop.offsetLeft/(spanvolume.offsetWidth-spanvolumeop.offsetWidth));//默认音量
