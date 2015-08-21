@@ -149,7 +149,7 @@ $("#upload")[0].onchange = function(){
 	};
 	
 };
-playModeBtn.onclick = function(){
+playModeBtn.onclick = function(event){
 	var self = this;
 	var playModeSelect = $("#play_mode_select")[0];
 	playModeSelect.style.display = "block";
@@ -165,7 +165,12 @@ playModeBtn.onclick = function(){
 			changeModeSequence(this.title,playModeSelect);
 		}
 	};
+	event.stopPropagation();
 };
+
+document.onclick = function () {
+	$("#play_mode_select")[0].style.display = "none";
+}
 
 //选中一个播放模式之后切换整个列表的顺序，让选中的排在最下面
 function changeModeSequence(title,playModeSelect){
