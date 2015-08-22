@@ -167,9 +167,8 @@ playModeBtn.onclick = function(){
 	};
 };
 
-//选中一个播放模式之后切换整个列表的顺序，让选中的排在最下面
+//选中一个播放模式之后切换整个列表的顺序，让选中的排在最上面
 function changeModeSequence(title,playModeSelect){
-	console.log(title);
 	var selectIndex = 0;
 	for (var i = 0,len = playModeSelect.childNodes.length; i < len; i++) {
 		if(playModeSelect.childNodes[i].title ==title){
@@ -178,7 +177,6 @@ function changeModeSequence(title,playModeSelect){
 		}
 	};	
 	while(selectIndex>0){
-		console.log("index-->"+selectIndex);
 		playModeSelect.appendChild(playModeSelect.firstChild);
 		selectIndex--;
 	}
@@ -239,3 +237,23 @@ spanvolumeop.onmousedown = function(event){
 
 
 mv.changeVolume(spanvolumeop.offsetLeft/(spanvolume.offsetWidth-spanvolumeop.offsetWidth));//默认音量
+
+$("#playbtn")[0].onclick = function(){
+	if(this.className==="pausemusic"){
+		mv.stopSeconds = mv.getAC().currentTime;
+		mv.playedSeconds += Math.floor(mv.stopSeconds - mv.beginSeconds);
+		mv.currentBufferSourceNode[mv.currentBufferSourceNode.stop?"stop":noteOff](0);
+		console.log("stopSeconds:"+mv.stopSeconds+";playedSeconds:"+mv.playedSeconds+";beginSeconds:"+mv.beginSeconds);
+	}else if(this.className === "playmusic"){
+		var bufferSource = mv.getAC().createBufferSource();
+		mv.currentBufferSourceNode = bufferSource;
+		bufferSource.connect(mv.analyser);
+		bufferSource.buffer = mv.currentArrayBuffer;//保存解析好的buffer
+		bufferSource[bufferSource.start?"start":"noteOn"](mv.getAC().currentTime,mv.playedSeconds);
+		mv.beginSeconds = mv.getAC().currentTime;
+		mv.currentSource = bufferSource; 
+	}
+
+	this.className = this.className=="playmusic"?"pausemusic":"playmusic";
+	console.log(mv.getAC().currentTime);
+}

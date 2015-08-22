@@ -137,7 +137,8 @@ input[type="range"]::-moz-range-thumb{
 	top: 10px; */
 	margin: 0 auto;
 	padding-top: 80px;
-	width: 280px;
+	padding-left: 10px;
+	width: 290px;
 	height: 42px;
 }
 .prev_music{
@@ -156,14 +157,22 @@ input[type="range"]::-moz-range-thumb{
 #playbtn{
 	float: left; 
 	display: inline-block;
-	background: url(../images/bg.png) -105px 0px;
 	height: 42px;
 	width: 42px;
 	margin-left: 5px;
 	cursor: pointer;
 }
-#playbtn:hover{
+.playmusic{
+	background: url(../images/bg.png) -105px 0px;
+}
+.playmusic:hover{
 	background-position: -105px -42px;
+}
+.pausemusic{
+	background: url(../images/bg.png) -291px -88px;
+}
+.pausemusic:hover{
+	background: url(../images/bg.png) -333px -88px;
 }
 .next_music{
 	display: inline-block;
@@ -277,7 +286,7 @@ input[type="range"]::-moz-range-thumb{
 	cursor: pointer;
 }
 
-.prev_music span,.playmusic span,.next_music span,#palyWayBtn span{
+.prev_music span,#playbtn span,.next_music span,#palyWayBtn span{
 	visibility: hidden;
 }
 #play_mode_select{
