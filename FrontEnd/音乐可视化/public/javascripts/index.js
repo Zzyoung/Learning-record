@@ -247,6 +247,9 @@ $("#playbtn")[0].onclick = function(){
 	if(this.className==="pausemusic"){
 		mv.stopSeconds = mv.getAC().currentTime;
 		mv.playedSeconds += Math.floor(mv.stopSeconds - mv.beginSeconds);
+		if(!mv.currentBufferSourceNode){
+			return ;
+		}
 		mv.currentBufferSourceNode[mv.currentBufferSourceNode.stop?"stop":noteOff](0);
 		console.log("stopSeconds:"+mv.stopSeconds+";playedSeconds:"+mv.playedSeconds+";beginSeconds:"+mv.beginSeconds);
 	}else if(this.className === "playmusic"){
