@@ -90,14 +90,51 @@ var Utils = {
 			bar.style.display = "none";
 			bar.style.opacity = 0.5;
 		}
-	}
-	,
+	},
 	calculateTop:function (self){
-	var top = self.offsetTop;
+		var top = self.offsetTop;
 		var parent = self.parentNode;
 		while(parent = parent.offsetParent){
 			top+=parent.offsetTop;
 		}
 		return top;
+	},
+	calculateLeft:function(self){
+		var left = self.offsetLeft;
+		var parent = self.parentNode;
+		while(parent = parent.offsetParent){
+			left += parent.offsetLeft;
+		}
+		return left;
+	},
+	getBodyScrollTop:function(){
+		return document.body.scrollTop ? document.body.scrollTop : document.documentElement.scrollTop;
+	},
+	getClientHeight:function(){
+		return document.body.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
+	},
+	getNodeText:function(node){
+		for(child = node.firstChild;child!=null;child=child.nextSibling){
+			var type = child.nodeType;
+			if(type === 3){
+				return child.nodeValue;
+			}
+		}
+	},
+	getParentByCls:function(node,clsName){
+		var parent = node.parentNode;
+		while(parent!=null){
+			if(Utils.containsClass(parent,clsName)){
+				return parent;
+			}
+			parent = parent.parentNode;
+		}
+	},
+	createElement:function(nodeName,clsNames){
+		var element = document.createElement(nodeName);
+		for (var i = clsNames.length - 1; i >= 0; i--) {
+			Utils.addClass(element,clsNames[i]);
+		};
+		return element;
 	}
 };
